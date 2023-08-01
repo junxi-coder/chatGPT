@@ -404,7 +404,7 @@ public class WebServiceImpl implements IWebService {
 		questionMsgModel.setView_type(ViewType.TEXT);
 
 		//校验是否有敏感词
-		//List<ChatGptMsgModel> resultModelList = this.checkSensitiveWord(questionMsgModel, insertMap, chatCode);
+//		List<ChatGptMsgModel> resultModelList = this.checkSensitiveWord(questionMsgModel, insertMap, chatCode);
 //		if (Func.isNotEmpty(resultModelList)) {
 //			return resultModelList;
 //		}

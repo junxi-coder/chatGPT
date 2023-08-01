@@ -99,16 +99,16 @@ public class OpenController {
 
 		String redisKey = "imagecode:" + phone;
 		try {
-//			if (!bladeRedis.exists(redisKey)) {
-//				return R.fail("验证过期，请重试");
-//			}
-//			Integer posX = bladeRedis.get(redisKey);
-//			if (Func.isEmpty(posX) || Func.isEmpty(movePosX)) {
-//				return R.fail("验证过期，请重试");
-//			}
-//			if (Math.abs(posX - movePosX) > 10) {  //偏差大于10
-//				return R.fail("验证不通过");
-//			}
+			if (!bladeRedis.exists(redisKey)) {
+				return R.fail("验证过期，请重试");
+			}
+			Integer posX = bladeRedis.get(redisKey);
+			if (Func.isEmpty(posX) || Func.isEmpty(movePosX)) {
+				return R.fail("验证过期，请重试");
+			}
+			if (Math.abs(posX - movePosX) > 10) {  //偏差大于10
+				return R.fail("验证不通过");
+			}
 		} finally {
 			bladeRedis.del(redisKey);
 		}
@@ -132,15 +132,15 @@ public class OpenController {
 		if (Func.isEmpty(phone)) {
 			return R.fail("请输入手机号码");
 		}
-//		File file = new File(ChatgptConfig.getUploadUrl() + "/image.png");
-//		SliderPuzzleInfo sliderPuzzleInfo = SlidePuzzleUtil.createImage(new FileInputStream(file));
-//		if (Func.isEmpty(sliderPuzzleInfo)) {
-//			return R.fail("图片验证码生成失败");
-//		}
+		File file = new File(ChatgptConfig.getUploadUrl() + "/image.jpg");
+		SliderPuzzleInfo sliderPuzzleInfo = SlidePuzzleUtil.createImage(new FileInputStream(file));
+		if (Func.isEmpty(sliderPuzzleInfo)) {
+			return R.fail("图片验证码生成失败");
+		}
 		String redisKey = "imagecode:" + phone;
-//		bladeRedis.set(redisKey, sliderPuzzleInfo.getPosX());
-		bladeRedis.set(redisKey, 123456);
-		SliderPuzzleInfo sliderPuzzleInfo = new SliderPuzzleInfo();
+		bladeRedis.set(redisKey, sliderPuzzleInfo.getPosX());
+//		bladeRedis.set(redisKey, 123456);
+//		SliderPuzzleInfo sliderPuzzleInfo = new SliderPuzzleInfo();
 		sliderPuzzleInfo.setToken(phone);
 		sliderPuzzleInfo.setBigImage(null);
 		sliderPuzzleInfo.setSmallImage(null);
@@ -392,6 +392,10 @@ public class OpenController {
 		}
 		return null;
 	}
+
+
+
+
 
 }
 

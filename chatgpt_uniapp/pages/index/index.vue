@@ -7,7 +7,7 @@
 			</view>
 			<view class="content">
 				<view class="h1">
-					<img src="../../static/pc/mybook.png"></img>SUSU
+					<img src="../../static/pc/mybook.png"></img>我在这
 				</view>
 				<!-- <view class="member-box" v-if="isLogin">
 					<u-button type="primary" text="vip充值" :customStyle="{width:'120px'}" @click="openMember"></u-button>

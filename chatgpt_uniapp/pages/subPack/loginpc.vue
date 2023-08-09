@@ -24,9 +24,9 @@
 						<u-button type="primary" @click="submitBtn" text="登录" :loading="loading" loading-text="登录中" :customStyle="{margin:'20px 0'}"></u-button>
 					</u-form-item>
 				</u--form>
-				<view class="wx-login-pop">
+				<!-- <view class="wx-login-pop">
 					<text @click="openWxLogin">微信登录</text>
-				</view>
+				</view> -->
 				<u-popup :show="isActive" mode="center" round="5" :customStyle="{width:'360px'}" :closeable="true" @close="isActive=false">
 					<view class="move-box">
 						<view class="move-img-box">

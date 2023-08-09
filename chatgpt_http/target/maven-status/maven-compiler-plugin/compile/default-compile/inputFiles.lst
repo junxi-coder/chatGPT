@@ -1,0 +1,11 @@
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/service/impl/ChatGPTServiceImpl.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/model/ResultModel.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/ChatGptApplication.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/model/ChatGptPublicParam.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/model/Usage.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/model/ReqParam.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/model/ChatGptParam.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/controller/ChatGptController.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/model/Choice.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/service/IChatGPTService.java
+/Users/sujunxi/code-java/chatGPT/chatgpt_http/src/main/java/com/mjkj/chatgpt/model/ResultStr.java

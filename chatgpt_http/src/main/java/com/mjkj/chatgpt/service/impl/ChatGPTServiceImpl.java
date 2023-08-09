@@ -87,7 +87,7 @@ public class ChatGPTServiceImpl implements IChatGPTService {
         HttpRequest request  = HttpRequest.post(url)
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + apiKey);
-        request.setHttpProxy("127.0.0.1", 7890);
+//        request.setHttpProxy("127.0.0.1", 7890);
 		String body =/*request.setHttpProxy("127.0.0.1", 7890)*/
         request.body(req_body)
                 .execute().body();

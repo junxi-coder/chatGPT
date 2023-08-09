@@ -40,12 +40,12 @@
 										复制
 									</view>
 								</view>
-								<!-- <view class="btn-item" @click="operationBtnFun('fy')">
+								<view class="btn-item" @click="operationBtnFun('fy')">
 									<image class="btn-item-icon" src="../../static/chat-fy.png"></image>
 									<view class="btn-item-text">
 										Ai翻译
 									</view>
-								</view> -->
+								</view>
 							</view>
 						</view>
 					</view>

@@ -1,0 +1,11 @@
+com/mjkj/chatgpt/model/ReqParam.class
+com/mjkj/chatgpt/ChatGptApplication.class
+com/mjkj/chatgpt/model/ChatGptPublicParam.class
+com/mjkj/chatgpt/model/ChatGptParam.class
+com/mjkj/chatgpt/service/impl/ChatGPTServiceImpl.class
+com/mjkj/chatgpt/model/ResultStr.class
+com/mjkj/chatgpt/model/Usage.class
+com/mjkj/chatgpt/model/ResultModel.class
+com/mjkj/chatgpt/model/Choice.class
+com/mjkj/chatgpt/controller/ChatGptController.class
+com/mjkj/chatgpt/service/IChatGPTService.class

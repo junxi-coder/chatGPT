@@ -12,4 +12,4 @@ ADD ./blade-gateway.jar ./app.jar
 
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
 
-CMD ["--spring.profiles.active=prod"]
+CMD ["--spring.profiles.active=dev"]

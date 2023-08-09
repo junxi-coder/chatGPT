@@ -89,7 +89,7 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/api" : {
-                    "target" : "http://localhost:9872", //请求的目标域名
+                    "target" : "http://aiedu.club/api", //请求的目标域名
                     "ws" : true,
                     "pathRewrite" : {
                         "^/api" : "/"

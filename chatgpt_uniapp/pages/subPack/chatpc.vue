@@ -1,54 +1,18 @@
-<template>
-	<view class="chat-pc">
-		<view class="chat-area">
-			<view class="chat-box">
-				<scroll-view :animation="scrollAnimationData" ref="scrollview" @click="hideKey" scroll-y="true" class="scroll-view" :style="chatBodyBottom" :scroll-into-view="scrollIntoID" :scroll-with-animation="false" @scrolltoupper="getTopDataFun" @touchstart="scrollTouchstartFun">
-					<u-loadmore v-show="pageObj.total >= pageObj.size" :status="loadinStatus" nomoreText="没有更多消息了" loadmoreText="下拉查看更多记录" />
-					<view v-for="(item, index) in msgList" :key="item.id" :id="'chat_' + item.id">
-						<uni-chat-detail-pc style="flex: 1" :list="msgList" :item="item" :index="index"  :dfAvatar="dfAvatar" @set-scroll-index="setScrollIndexFun" @open-pay-member="openPayMember">
-						</uni-chat-detail-pc>
-					</view>
-					<view style="height: 0px" :id="scrollLastID"></view>
-				</scroll-view>
-				<view class="chat-foot-box">
-					<u--textarea maxlength="-1" :cursorSpacing="15" :showConfirmBar="false" :placeholder="sysConfig.content_tip" ref="sendTextarea" class="dh-input" v-model="msg" border="none" autoHeight @confirm="sendIssueFun" @linechange="setinputHeight"></u--textarea>
-					<view class="foot-btn" :class="{ active: msg && !isSend && !isWaiting }" @click="sendIssueFun">
-						<view v-show="!isSend && !isWaiting">发送</view>
-						<loading-view-pc v-show="isSend || isWaiting"></loading-view-pc>
-					</view>
-				</view>
-			</view>
-		</view>
-		<u-popup :show="payMemberPop" mode="center" :closeable="true" :closeOnClickOverlay="false" @close="payMemberPop = false" round="5" :customStyle="{width:'400px', padding:'10px'}">
-			<view class="pay-member-title"> 开通VIP </view>
-			<member-pay-pc @pay-close="payClose"></member-pay-pc>
-		</u-popup>
-		<u-overlay :show="showTip" @click="showTip = false">
-			<view class="tip-warp-box" v-if="showTip" style="padding-top: 20px">
-				<view class="tip_q" style="
-		        text-align: right;
-		        font-size: 12px;
-		        padding-right: 10px;
-		        color: red;
-		      ">
-					↙ 发送问题
-				</view>
-				<uni-chat-detail-pc :list="tipObj.msgList" :item="tipObj.my"></uni-chat-detail-pc>
-				<view class="tip_a" style="
-		        text-align: left;
-		        font-size: 12px;
-		        padding-left: 10px;
-		        color: red;
-		      ">
-					↘ 等待AI回答问题
-				</view>
-				<uni-chat-detail-pc :list="tipObj.msgList" :item="tipObj.ai"></uni-chat-detail-pc>
-			</view>
-		</u-overlay>
-		<more-chat-num ref="moreChatNum" pageName="chat" @set-vip-fun="payMemberPop = true" advice="pc"></more-chat-num>
-	</view>
-</template>
 
+<template>
+    <view class="chat-pc">
+        <scroll-view class="chat-list" ref="scrollview" @click="hideKey" scroll-y="true">
+            <view v-for="(item, index) in msgList" :key="item.id" :id="'chat_' + item.id" :class="item.sender === 'ai' ? 'ai-message' : 'user-message'">
+                <uni-chat-detail-pc :list="msgList" :item="item" :index="index" :dfAvatar="dfAvatar" @set-scroll-index="setScrollIndexFun" @open-pay-member="openPayMember"></uni-chat-detail-pc>
+            </view>
+        </scroll-view>
+        
+        <view class="chat-input-area">
+            <u--textarea v-model="msg" ref="sendTextarea" class="chat-input" placeholder="Type a message" @confirm="sendIssueFun" @linechange="setinputHeight"></u--textarea>
+            <view class="send-button" @click="sendIssueFun">发送</view>
+        </view>
+    </view>
+</template>
 <script>
 	import {
 		mapGetters,
@@ -135,8 +99,7 @@
 			chatBodyBottom() {
 				let boxHeight = this.clientWH.height*0.8*0.68
 				if(boxHeight>400){
-					// return `height:${boxHeight - 55}px`
-					return `height:96%`
+					return `height:${boxHeight - 55}px`
 				} else {
 					return `height:345px;`;
 				}
@@ -769,80 +732,49 @@
 		},
 	};
 </script>
-
 <style lang="scss" scoped>
-	.chat-pc {
-		width: 100%;
-		height: 76%;
-		
-		left: 0;
-		top: 0;
+    .chat-pc {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
 
-		.chat-area {
-			min-width: 760px;
-			min-height:400px;
-			position: absolute;
-			left: 20px;
-			right: 20px;
-			top: 25px;
-			bottom: 25px;
-			padding: 0 5px;
-			box-sizing: border-box;
+    .chat-list {
+        flex: 1;
+        overflow-y: scroll;
+        padding: 10px;
+    }
 
-			.chat-box {
-				background-color: #f4f4f4;
-				height: 100%;
-				border-radius: 5px;
+	
+    .ai-message .message-content, .user-message .message-content {
+        background-color: #e6f7ff;  // Light blue background for both AI and user messages
+        border-radius: 8px;
+        padding: 10px;
+        margin: 5px 0;
+    }
 
-				.chat-foot-box {
-					position: absolute;
-					bottom: 0;
-					width: 100%;
-					display: flex;
-					align-items: flex-start;
-					justify-content: center;
-					border-top: 1px solid #e9e9e9;
-					padding: 8px 6px;
+    .chat-input-area {
+        display: flex;
+        align-items: center;
+        padding: 10px;  // Reduced padding for reducing height
+        border-top: 1px solid #e0e0e0;
+    }
 
-					/deep/.u-textarea {
-						margin: 0 10px;
-						padding: 0;
+    .chat-input {
+        flex: 1;
+        height: 30px;  // Reduced height of the input box
+        border: none;
+        border-radius: 8px;
+        padding: 5px 10px;  // Reduced padding for reducing height
+        background-color: #f5f5f5;
+        margin-right: 10px;
+    }
 
-						.u-textarea__field {
-							padding: 9px;
-						}
-					}
-
-					.dh-input {
-						font-size: 15px;
-						min-height: 30px;
-						max-height: 140px;
-						overflow: scroll;
-						// flex: 1;
-						border-radius: 20px;
-						padding: 0 6px;
-						background-color: #ffffff;
-						margin: 0 6px;
-						border: 1px solid #ededed;
-					}
-				
-					.foot-btn {
-						height: 37px;
-						width: 70px;
-						border-radius: 20px;
-						text-align: center;
-						line-height: 37px;
-						background-color: #2b70f9;
-						color: #fff;
-						font-size: 16px;
-						opacity: 0.4;
-
-						&.active {
-							opacity: 1;
-						}
-					}
-				}
-			}
-		}
-	}
+    .send-button {
+        padding: 5px 20px;  // Reduced padding for reducing height
+        background-color: #00a6ab;
+        color: #ffffff;
+        border-radius: 8px;
+        cursor: pointer;
+    }
 </style>

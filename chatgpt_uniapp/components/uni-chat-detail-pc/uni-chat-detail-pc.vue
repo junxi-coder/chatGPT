@@ -12,7 +12,7 @@
 				<image v-else class="chat-img" src="../../static/ai_avatar.png" mode="aspectFill"></image>
 
 				<view style="flex-direction: row;justify-content: center;align-items: center;">
-					<view class="nv-chat" style="flex-direction: column;flex-wrap:wrap;">
+					<view class="nv-chat" :style="nvChatStyle">
 						<view :class="item.message_type=='q'?'margin-right nv-rowever':'margin-left nv-row'" :style="'border-radius: 5px;align-items: center;margin-left:10px;border: 1rpx solid #f0f0f0;'" v-if="item.view_type == 'image'">
 							<image :lazy-load="true" :src="item.message_content" @click="previewImage(item.message_content)" mode="widthFix" style="width: 130px;border-radius: 5px;"></image>
 						</view>
@@ -164,6 +164,14 @@
 		},
 		computed: {
 			...mapGetters(['sysConfig', 'userInfo']),
+			nvChatStyle() {
+			            return {
+			                'flex-wrap': 'wrap-reverse',
+			                'max-width': `${this.systemInfo.screenWidth - 710}px`,
+							'flex-direction': 'column',
+							'flex-wrap':'wrap'
+			            };
+			        },
 		},
 		created() {
 			this.chatDetailBoxMaxWidth = this.systemInfo.screenWidth - 110;
@@ -447,6 +455,7 @@
 
 	.nv-chat {
 		flex-wrap: wrap-reverse;
+	
 	}
 
 	.nv-row {
@@ -458,12 +467,12 @@
 	}
 
 	.white-bg {
-		background-color: #2B70F9;
+		background-color: #00A6AB;
 		color: #fff;
 	}
 
 	.gr-bg {
-		background-color: #ffffff;
+		background-color: #f4f4f4;
 	}
 
 	.more-layer {

@@ -6,7 +6,7 @@ import uView from '@/uni_modules/uview-ui'
 
 Vue.mixin({
 	onShow() {
-		document.title = '一个爱回答问题的网页'
+		document.title = '超级AI大脑PC开源'
 	}
 })
 // #ifndef VUE3
